@@ -1,0 +1,95 @@
+{
+  "name": "testgen-twelve",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/testgen-twelve/src",
+  "prefix": "testgen-twelve",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/testgen-twelve",
+        "index": "apps/testgen-twelve/src/index.html",
+        "main": "apps/testgen-twelve/src/main.ts",
+        "polyfills": "apps/testgen-twelve/src/polyfills.ts",
+        "tsConfig": "apps/testgen-twelve/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/testgen-twelve/src/favicon.ico",
+          "apps/testgen-twelve/src/assets"
+        ],
+        "styles": ["apps/testgen-twelve/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/testgen-twelve/src/environments/environment.ts",
+              "with": "apps/testgen-twelve/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "testgen-twelve:build:production"
+        },
+        "development": {
+          "browserTarget": "testgen-twelve:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "testgen-twelve:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/testgen-twelve/src/**/*.ts",
+          "apps/testgen-twelve/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/testgen-twelve"],
+      "options": {
+        "jestConfig": "apps/testgen-twelve/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
